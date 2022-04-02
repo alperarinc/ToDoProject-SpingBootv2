@@ -1,17 +1,18 @@
-package com.todoproject.v2.entity;
+package com.todoproject.v2.Entities;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="task")
 public class Task {
-
     @Id
     @Column(name="ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name="title")
     private String title;
+
     @Column(name = "text")
     private String text;
 
@@ -21,9 +22,7 @@ public class Task {
         this.text = text;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() {return id; }
 
     public void setId(int id) {
         this.id = id;

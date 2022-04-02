@@ -1,6 +1,7 @@
 package com.todoproject.v2.Business;
+import com.todoproject.v2.Entities.*;
 
-import com.todoproject.v2.entity.*;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface ITaskService {
     List<Task> getAll();
     void add(Task task);
     void delete(Task task);
-    Task getById(int id);
+    void update(Task task);
 
 
 }
