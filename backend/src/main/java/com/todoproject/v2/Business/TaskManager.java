@@ -11,17 +11,20 @@ import java.util.List;
 
 @Service
 public class TaskManager implements ITaskService {
+
     private ITaskDal taskDal;
 
     @Autowired
     public TaskManager(ITaskDal taskDal){
+
         this.taskDal=taskDal;
     }
 
     @Override
     @Transactional
     public List<Task> getAll() {
-        return null;
+
+        return this.taskDal.getAll();
     }
 
     @Override
@@ -42,8 +45,8 @@ public class TaskManager implements ITaskService {
     }
 
     @Override
-    @Transactional
     public Task getById(int id) {
         return null;
     }
+
 }

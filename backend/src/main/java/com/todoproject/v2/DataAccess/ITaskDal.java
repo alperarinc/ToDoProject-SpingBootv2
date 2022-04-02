@@ -9,4 +9,5 @@ public interface ITaskDal {
     void add(Task task);
     void delete(Task task);
     void update(Task task);
+    Task getById(int id);
 }
