@@ -15,9 +15,9 @@ public class TaskManager implements ITaskService {
     private ITaskDal taskDal;
 
     @Autowired
-    public TaskManager(ITaskDal taskDal){
+    public TaskManager(ITaskDal taskDal) {
 
-        this.taskDal=taskDal;
+        this.taskDal = taskDal;
     }
 
     @Override
@@ -30,23 +30,25 @@ public class TaskManager implements ITaskService {
     @Override
     @Transactional
     public void add(Task task) {
+        this.taskDal.add(task);
 
     }
 
     @Override
     @Transactional
     public void delete(Task task) {
+        this.taskDal.delete(task);
 
     }
 
     @Override
     public void update(Task task) {
-
+        this.taskDal.update(task);
     }
 
     @Override
     public Task getById(int id) {
-        return null;
+        return this.taskDal.getById(id);
     }
 
 }

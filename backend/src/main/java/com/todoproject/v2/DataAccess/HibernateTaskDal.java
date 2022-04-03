@@ -33,13 +33,14 @@ public class HibernateTaskDal implements ITaskDal{
     @Override
     public void add(Task task) {
         Session session = entityManager.unwrap(Session.class);
-        session.saveOrUpdate(task);
+        session.save(task);
     }
 
     @Override
     public void delete(Task task) {
         Session session = entityManager.unwrap(Session.class);
-        session.delete(task);
+        Task taskDelete = session.get(Task.class, task.getId());
+        session.delete(taskDelete);
 
     }
 

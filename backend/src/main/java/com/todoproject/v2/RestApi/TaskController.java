@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class TaskController {
@@ -15,30 +16,37 @@ public class TaskController {
 
     @Autowired
     public TaskController(ITaskService taskService) {
+
         this.taskService = taskService;
     }
+
     @GetMapping("/tasks")
     public List<Task> get(){
+
         return taskService.getAll();
     }
 
-    @GetMapping("/add")
+    @PostMapping("/add")
     public void add(@RequestBody Task task){
+
         taskService.add(task);
     }
 
-    @GetMapping("/delete")
+    @PostMapping("/delete/{id}")
     public void delete(@RequestBody Task task){
+
         taskService.delete(task);
     }
 
-    @GetMapping("/update")
+    @PostMapping("/update")
     public void update(@RequestBody Task task){
+
         taskService.update(task);
     }
 
     @GetMapping("/tasks/{id}")
     public Task getById(@PathVariable int id){
+
         return taskService.getById(id);
     }
 
