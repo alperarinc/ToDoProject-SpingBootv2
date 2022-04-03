@@ -1,19 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import CreateTask from '../modals/CreateTask'
 import Card from './Card';
+import axios from 'axios';
 
 const TodoList = () => {
     const [modal, setModal] = useState(false);
     const [taskList, setTaskList] = useState([])
     
-    useEffect(() => {
-        let arr = localStorage.getItem("taskList")
-       
-        if(arr){
-            let obj = JSON.parse(arr)
-            setTaskList(obj)
-        }
-    }, [])
+   useEffect(()=>{
+
+    axios.get("http://localhost:8080/api/tasks").then(res => {
+        const tasks = res.data;
+        console.log(tasks);
+        localStorage.setItem("taskList",JSON.stringify(tasks))
+    })
+    let arr = localStorage.getItem("taskList")
+    if(arr){
+        let obj= JSON.parse(arr)
+        setTaskList(obj)
+    }
+   } , [])
 
 
     const deleteTask = (index) => {

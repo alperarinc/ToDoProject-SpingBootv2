@@ -1,34 +1,43 @@
 import React, { useState , useEffect} from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import axios from 'axios';
 
 const EditTaskPopup = ({modal, toggle, updateTask, taskObj}) => {
-    const [taskName, setTaskName] = useState('');
-    const [description, setDescription] = useState('');
+    const [title, setTitle] = useState('');
+    const [text, setText] = useState('');
+    const [id, setId]= useState('');
 
     const handleChange = (e) => {
         
         const {name, value} = e.target
 
-        if(name === "taskName"){
-            setTaskName(value)
+        if(name === "title"){
+            setTitle(value)
         }else{
-            setDescription(value)
+            setText(value)
         }
-
-
     }
 
     useEffect(() => {
-        setTaskName(taskObj.Name)
-        setDescription(taskObj.Description)
+        setTitle(taskObj.title)
+        setText(taskObj.text)
+        setId(taskObj.id)
     },[])
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        let tempObj = {}
-        tempObj['Name'] = taskName
-        tempObj['Description'] = description
+        const tempObj = {}
+        tempObj['title'] = title
+        tempObj['text'] = text
+        tempObj['id'] = id
+        axios.post("http://localhost:8080/api/update", tempObj);
         updateTask(tempObj)
+
+        axios.get("http://localhost:8080/api/todos").then(res => {
+            const todos = res.data;
+            console.log(todos);
+             localStorage.setItem("taskList", JSON.stringify(todos))
+        })
     }
 
     return (
@@ -38,11 +47,11 @@ const EditTaskPopup = ({modal, toggle, updateTask, taskObj}) => {
             
                     <div className = "form-group">
                         <label>Task Name</label>
-                        <input type="text" className = "form-control" value = {taskName} onChange = {handleChange} name = "taskName"/>
+                        <input type="text" className = "form-control" value = {title} onChange = {handleChange} name = "title"/>
                     </div>
                     <div className = "form-group">
                         <label>Description</label>
-                        <textarea rows = "5" className = "form-control" value = {description} onChange = {handleChange} name = "description"></textarea>
+                        <textarea rows = "5" className = "form-control" value = {text} onChange = {handleChange} name = "text"></textarea>
                     </div>
                 
             </ModalBody>
