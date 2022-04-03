@@ -32,7 +32,7 @@ public class TaskController {
         taskService.add(task);
     }
 
-    @PostMapping("/delete/{id}")
+    @PostMapping("/delete")
     public void delete(@RequestBody Task task){
 
         taskService.delete(task);

@@ -42,12 +42,16 @@ public class TaskManager implements ITaskService {
     }
 
     @Override
+    @Transactional
     public void update(Task task) {
+
         this.taskDal.update(task);
     }
 
     @Override
+    @Transactional
     public Task getById(int id) {
+
         return this.taskDal.getById(id);
     }
 
